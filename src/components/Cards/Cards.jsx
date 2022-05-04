@@ -1,36 +1,13 @@
-import  { useEffect, useState } from 'react'
 import styles from './Cards.scss';
 
 const Cards = ({results}) => {
 
     let display = [];
-    console.log(results);
-
-    let [api, setApi] = useState("");
-
-    let [dimension, setDimension] = useState("");
-    let [residents, setResidents] = useState();
-
-    useEffect(() => {
-        (async function(){
-            let data = await fetch(api).then(res => res.json());
-            setDimension(data.dimension);
-            console.log(data.dimension)
-            setResidents(data.residents.length);
-            console.log(data.residents.length)
-          })();
-    }, [api]);
-
     
     if(results){
         
         results.forEach((x) => {
             let {id, image, name, species, gender, origin, location, status } = x;
-
-            setApi(origin.url);
-
-            // console.log("dimension :", dimension);
-            // console.log("residents :", residents);
             
             display.push(
                 <div key={id} className="col-5 cards">
@@ -44,9 +21,6 @@ const Cards = ({results}) => {
 
                             <div className="origin fw-bold mt-3"> Origin :
                                 <div className="fw-normal">Name : {origin.name}</div>
-                                <div className="fw-normal">Dimension : {dimension}</div>
-                                <div className="fw-normal">No of Residents : {residents}</div>
-
                             </div>
 
                             <div className="origin fw-bold mt-3"> Location :
